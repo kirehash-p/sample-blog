@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログの始め方入門 #11 - 自作ブログ構築（後編）</title>
+    <script type="module" crossorigin src="/sample-blog/assets/index-DtQNsCsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/sample-blog/assets/index-BM310Bkd.css">
+  <meta name="description" content="ブログの始め方入門 11 - 自作ブログ構築（後編）">
+    <meta property="og:title" content="ブログの始め方入門 #11 - 自作ブログ構築（後編）">
+    <meta property="og:description" content="ブログの始め方入門 11 - 自作ブログ構築（後編）">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800">
+    <meta property="og:url" content="/sample-blog/blog/blog-start-11-build-blog-part2.html">
+    <link rel="canonical" href="/sample-blog/blog/blog-start-11-build-blog-part2.html">
+  </head>
+  <body>
+    <div id="root"><article class="post-content" data-post="blog-start-11-build-blog-part2"><h1>ブログの始め方入門 #11 - 自作ブログ構築（後編）</h1>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-10-build-blog-part1.html">自作ブログ構築（前編）</a></p>
+<hr>
+<h2>後編の目標</h2>
+<p>前編で基礎を構築しました。後編では以下を完成させます：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> ルーティングの設定</li>
+<li><input checked="" disabled="" type="checkbox"> 記事一覧・詳細ページ</li>
+<li><input checked="" disabled="" type="checkbox"> ダークモード対応</li>
+<li><input checked="" disabled="" type="checkbox"> ビルドとデプロイ</li>
+<li><input checked="" disabled="" type="checkbox"> CI/CDの設定</li>
+</ul>
+<h2>ルーティングの設定</h2>
+<h3>React Routerのインストール</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash">npm install react-router-dom</code></pre><h3>ルーター設定</h3>
+<p><code>src/App.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">BrowserRouter</span>, <span class="hljs-title class_">Routes</span>, <span class="hljs-title class_">Route</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Layout</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/Layout&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Home</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./pages/Home&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ArticlePage</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./pages/Article&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">NotFound</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./pages/NotFound&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">BrowserRouter</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Layout</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">Home</span> /&gt;</span>} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/article/:slug&quot;</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">ArticlePage</span> /&gt;</span>} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;*&quot;</span> <span class="hljs-attr">element</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">NotFound</span> /&gt;</span>} /&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Layout</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">BrowserRouter</span>&gt;</span></span>
+  );
+}</code></pre><h2>記事一覧ページ</h2>
+<p><code>src/pages/Home.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ArticleCard</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../components/ArticleCard&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ArticleIndex</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../types&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Home</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [articles, setArticles] = useState&lt;<span class="hljs-title class_">ArticleIndex</span>[]&gt;([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchArticles</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// 記事インデックスを取得</span>
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/blog/index.json&#x27;</span>);
+        <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+        
+        <span class="hljs-comment">// 日付でソート（新しい順）</span>
+        <span class="hljs-keyword">const</span> sorted = data.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">a</span>: <span class="hljs-title class_">ArticleIndex</span>, <span class="hljs-attr">b</span>: <span class="hljs-title class_">ArticleIndex</span></span>) =&gt;</span> 
+          <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(b.<span class="hljs-property">meta</span>.<span class="hljs-property">date</span>).<span class="hljs-title function_">getTime</span>() - <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(a.<span class="hljs-property">meta</span>.<span class="hljs-property">date</span>).<span class="hljs-title function_">getTime</span>()
+        );
+        
+        <span class="hljs-title function_">setArticles</span>(sorted);
+      } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to fetch articles:&#x27;</span>, error);
+      } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
+      }
+    }
+
+    <span class="hljs-title function_">fetchArticles</span>();
+  }, []);
+
+  <span class="hljs-keyword">if</span> (loading) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex justify-center items-center h-64&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-3xl font-bold mb-8 text-gray-900 dark:text-white&quot;</span>&gt;</span>
+        最新の記事
+      <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;grid gap-6 md:grid-cols-2&quot;</span>&gt;</span>
+        {articles.map(article =&gt; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">ArticleCard</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">{article.slug}</span>
+            <span class="hljs-attr">slug</span>=<span class="hljs-string">{article.slug}</span>
+            {<span class="hljs-attr">...article.meta</span>}
+          /&gt;</span>
+        ))}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}</code></pre><h2>記事詳細ページ</h2>
+<p><code>src/pages/Article.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { useParams, <span class="hljs-title class_">Link</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span>;
+<span class="hljs-keyword">import</span> { useArticle } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../hooks/useArticle&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ArticlePage</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> { slug } = useParams&lt;{ <span class="hljs-attr">slug</span>: <span class="hljs-built_in">string</span> }&gt;();
+  <span class="hljs-keyword">const</span> { article, loading, error } = <span class="hljs-title function_">useArticle</span>(slug!);
+
+  <span class="hljs-keyword">if</span> (loading) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;flex justify-center items-center h-64&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+  }
+
+  <span class="hljs-keyword">if</span> (error || !article) {
+    <span class="hljs-keyword">return</span> (
+      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-center py-16&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-2xl font-bold text-gray-900 dark:text-white&quot;</span>&gt;</span>
+          記事が見つかりません
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-4 text-blue-500 hover:underline&quot;</span>&gt;</span>
+          トップに戻る
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+  }
+
+  <span class="hljs-keyword">const</span> { meta, html } = article;
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-3xl mx-auto&quot;</span>&gt;</span>
+      {/* ヘッダー */}
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mb-8&quot;</span>&gt;</span>
+        {meta.cover &amp;&amp; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+            <span class="hljs-attr">src</span>=<span class="hljs-string">{meta.cover}</span>
+            <span class="hljs-attr">alt</span>=<span class="hljs-string">{meta.title}</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full h-64 object-cover rounded-lg mb-6&quot;</span>
+          /&gt;</span>
+        )}
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-4xl font-bold text-gray-900 dark:text-white&quot;</span>&gt;</span>
+          {meta.title}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-4 flex items-center gap-4 text-gray-600 dark:text-gray-400&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">time</span>&gt;</span>{meta.date}<span class="hljs-tag">&lt;/<span class="hljs-name">time</span>&gt;</span>
+          {meta.updated &amp;&amp; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>更新: {meta.updated}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          )}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-4 flex flex-wrap gap-2&quot;</span>&gt;</span>
+          {meta.tags.map(tag =&gt; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span>
+              <span class="hljs-attr">key</span>=<span class="hljs-string">{tag}</span>
+              <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;px-3 py-1 text-sm bg-blue-100 text-blue-800 
+                       dark:bg-blue-900 dark:text-blue-200 rounded-full&quot;</span>
+            &gt;</span>
+              {tag}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          ))}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+
+      {/* 本文 */}
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> 
+        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;prose prose-lg dark:prose-invert max-w-none&quot;</span>
+        <span class="hljs-attr">dangerouslySetInnerHTML</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">__html:</span> <span class="hljs-attr">html</span> }}
+      /&gt;</span>
+
+      {/* フッター */}
+      <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-16 pt-8 border-t&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> 
+          <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span>
+          <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-blue-500 hover:underline&quot;</span>
+        &gt;</span>
+          ← 記事一覧に戻る
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span></span>
+  );
+}</code></pre><h2>ダークモード対応</h2>
+<h3>テーマフックの作成</h3>
+<p><code>src/hooks/useTheme.ts</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Theme</span> = <span class="hljs-string">&#x27;light&#x27;</span> | <span class="hljs-string">&#x27;dark&#x27;</span> | <span class="hljs-string">&#x27;system&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useTheme</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [theme, setTheme] = useState&lt;<span class="hljs-title class_">Theme</span>&gt;(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">window</span> === <span class="hljs-string">&#x27;undefined&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;system&#x27;</span>;
+    <span class="hljs-keyword">return</span> (<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;theme&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-title class_">Theme</span>) || <span class="hljs-string">&#x27;system&#x27;</span>;
+  });
+
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> root = <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>;
+    
+    <span class="hljs-keyword">const</span> <span class="hljs-title function_">applyTheme</span> = (<span class="hljs-params"><span class="hljs-attr">t</span>: <span class="hljs-title class_">Theme</span></span>) =&gt; {
+      <span class="hljs-keyword">if</span> (t === <span class="hljs-string">&#x27;system&#x27;</span>) {
+        <span class="hljs-keyword">const</span> prefersDark = <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">matchMedia</span>(<span class="hljs-string">&#x27;(prefers-color-scheme: dark)&#x27;</span>).<span class="hljs-property">matches</span>;
+        root.<span class="hljs-property">classList</span>.<span class="hljs-title function_">toggle</span>(<span class="hljs-string">&#x27;dark&#x27;</span>, prefersDark);
+      } <span class="hljs-keyword">else</span> {
+        root.<span class="hljs-property">classList</span>.<span class="hljs-title function_">toggle</span>(<span class="hljs-string">&#x27;dark&#x27;</span>, t === <span class="hljs-string">&#x27;dark&#x27;</span>);
+      }
+    };
+
+    <span class="hljs-title function_">applyTheme</span>(theme);
+    <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;theme&#x27;</span>, theme);
+
+    <span class="hljs-comment">// システムテーマの変更を監視</span>
+    <span class="hljs-keyword">const</span> mediaQuery = <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">matchMedia</span>(<span class="hljs-string">&#x27;(prefers-color-scheme: dark)&#x27;</span>);
+    <span class="hljs-keyword">const</span> <span class="hljs-title function_">handler</span> = (<span class="hljs-params"></span>) =&gt; {
+      <span class="hljs-keyword">if</span> (theme === <span class="hljs-string">&#x27;system&#x27;</span>) <span class="hljs-title function_">applyTheme</span>(<span class="hljs-string">&#x27;system&#x27;</span>);
+    };
+    
+    mediaQuery.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;change&#x27;</span>, handler);
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> mediaQuery.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&#x27;change&#x27;</span>, handler);
+  }, [theme]);
+
+  <span class="hljs-keyword">return</span> { theme, setTheme };
+}</code></pre><h3>テーマ切り替えボタン</h3>
+<p><code>src/components/ThemeToggle.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { useTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../hooks/useTheme&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ThemeToggle</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> { theme, setTheme } = <span class="hljs-title function_">useTheme</span>();
+
+  <span class="hljs-keyword">const</span> icons = {
+    <span class="hljs-attr">light</span>: <span class="hljs-string">&#x27;☀️&#x27;</span>,
+    <span class="hljs-attr">dark</span>: <span class="hljs-string">&#x27;🌙&#x27;</span>,
+    <span class="hljs-attr">system</span>: <span class="hljs-string">&#x27;💻&#x27;</span>,
+  };
+
+  <span class="hljs-keyword">const</span> nextTheme = {
+    <span class="hljs-attr">light</span>: <span class="hljs-string">&#x27;dark&#x27;</span>,
+    <span class="hljs-attr">dark</span>: <span class="hljs-string">&#x27;system&#x27;</span>,
+    <span class="hljs-attr">system</span>: <span class="hljs-string">&#x27;light&#x27;</span>,
+  } <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>;
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setTheme(nextTheme[theme])}
+      className=&quot;p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 
+                 transition-colors&quot;
+      aria-label={`現在のテーマ: ${theme}`}
+    &gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-xl&quot;</span>&gt;</span>{icons[theme]}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+  );
+}</code></pre><h2>ビルドスクリプト</h2>
+<h3>記事インデックスの生成</h3>
+<p><code>scripts/generate-index.mjs</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-keyword">import</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs/promises&#x27;</span>;
+<span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
+<span class="hljs-keyword">import</span> matter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gray-matter&#x27;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">BLOG_DIR</span> = <span class="hljs-string">&#x27;./public/blog&#x27;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">OUTPUT_FILE</span> = <span class="hljs-string">&#x27;./public/blog/index.json&#x27;</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generateIndex</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readdir</span>(<span class="hljs-variable constant_">BLOG_DIR</span>);
+  <span class="hljs-keyword">const</span> mdFiles = files.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f.<span class="hljs-title function_">endsWith</span>(<span class="hljs-string">&#x27;.md&#x27;</span>));
+  
+  <span class="hljs-keyword">const</span> articles = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(
+    mdFiles.<span class="hljs-title function_">map</span>(<span class="hljs-title function_">async</span> (filename) =&gt; {
+      <span class="hljs-keyword">const</span> filepath = path.<span class="hljs-title function_">join</span>(<span class="hljs-variable constant_">BLOG_DIR</span>, filename);
+      <span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(filepath, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
+      <span class="hljs-keyword">const</span> { data } = <span class="hljs-title function_">matter</span>(content);
+      
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">slug</span>: filename.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;.md&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),
+        <span class="hljs-attr">meta</span>: data,
+      };
+    })
+  );
+
+  <span class="hljs-comment">// 日付でソート</span>
+  articles.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> 
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(b.<span class="hljs-property">meta</span>.<span class="hljs-property">date</span>).<span class="hljs-title function_">getTime</span>() - <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(a.<span class="hljs-property">meta</span>.<span class="hljs-property">date</span>).<span class="hljs-title function_">getTime</span>()
+  );
+
+  <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">writeFile</span>(<span class="hljs-variable constant_">OUTPUT_FILE</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(articles, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`✅ Generated index with <span class="hljs-subst">${articles.length}</span> articles`</span>);
+}
+
+<span class="hljs-title function_">generateIndex</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-variable language_">console</span>.<span class="hljs-property">error</span>);</code></pre><h3>package.jsonにスクリプト追加</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node scripts/generate-index.mjs &amp;&amp; vite build&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;preview&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite preview&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;generate-index&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node scripts/generate-index.mjs&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre><h2>Cloudflare Pagesへのデプロイ</h2>
+<h3>なぜCloudflare Pagesか？</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>Cloudflare Pages</th>
+<th>Vercel</th>
+<th>Netlify</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>無料枠</td>
+<td>無制限</td>
+<td>100GB/月</td>
+<td>100GB/月</td>
+</tr>
+<tr>
+<td>ビルド時間</td>
+<td>500回/月</td>
+<td>6000分/月</td>
+<td>300分/月</td>
+</tr>
+<tr>
+<td>CDN</td>
+<td>全世界</td>
+<td>全世界</td>
+<td>全世界</td>
+</tr>
+<tr>
+<td>独自ドメイン</td>
+<td>無料</td>
+<td>無料</td>
+<td>無料</td>
+</tr>
+</tbody></table>
+<h3>デプロイ手順</h3>
+<ol>
+<li><strong>GitHubリポジトリにプッシュ</strong></li>
+</ol>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash">git init
+git add .
+git commit -m <span class="hljs-string">&quot;Initial commit&quot;</span>
+git remote add origin https://github.com/username/my-blog.git
+git push -u origin main</code></pre><ol start="2">
+<li><strong>Cloudflare Pagesでプロジェクト作成</strong></li>
+</ol>
+<ul>
+<li>Cloudflare Dashboard → Pages → Create a project</li>
+<li>GitHubを連携</li>
+<li>リポジトリを選択</li>
+</ul>
+<ol start="3">
+<li><strong>ビルド設定</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>値</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Build command</td>
+<td><code>npm run build</code></td>
+</tr>
+<tr>
+<td>Build output directory</td>
+<td><code>dist</code></td>
+</tr>
+<tr>
+<td>Node.js version</td>
+<td>18</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><strong>デプロイ開始</strong></li>
+</ol>
+<p>数分でデプロイが完了し、<code>https://your-blog.pages.dev</code> でアクセス可能になります。</p>
+<h2>GitHub Actionsでの自動デプロイ</h2>
+<p><code>.github/workflows/deploy.yml</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">to</span> <span class="hljs-string">Cloudflare</span> <span class="hljs-string">Pages</span>
+
+<span class="hljs-attr">on:</span>
+  <span class="hljs-attr">push:</span>
+    <span class="hljs-attr">branches:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>
+
+<span class="hljs-attr">jobs:</span>
+  <span class="hljs-attr">deploy:</span>
+    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
+    <span class="hljs-attr">steps:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">Node.js</span>
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v4</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;18&#x27;</span>
+          <span class="hljs-attr">cache:</span> <span class="hljs-string">&#x27;npm&#x27;</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span>
+        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span>
+        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">build</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">to</span> <span class="hljs-string">Cloudflare</span> <span class="hljs-string">Pages</span>
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">cloudflare/pages-action@v1</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">apiToken:</span> <span class="hljs-string">${{</span> <span class="hljs-string">secrets.CLOUDFLARE_API_TOKEN</span> <span class="hljs-string">}}</span>
+          <span class="hljs-attr">accountId:</span> <span class="hljs-string">${{</span> <span class="hljs-string">secrets.CLOUDFLARE_ACCOUNT_ID</span> <span class="hljs-string">}}</span>
+          <span class="hljs-attr">projectName:</span> <span class="hljs-string">my-blog</span>
+          <span class="hljs-attr">directory:</span> <span class="hljs-string">dist</span></code></pre><h3>シークレットの設定</h3>
+<ol>
+<li>Cloudflare Dashboard → My Profile → API Tokens</li>
+<li>「Create Token」→「Edit Cloudflare Pages」テンプレート</li>
+<li>GitHubリポジトリのSettings → Secrets → 追加</li>
+</ol>
+<h2>独自ドメインの設定</h2>
+<h3>ドメイン購入</h3>
+<ul>
+<li><strong>Cloudflare Registrar</strong>: 最安値、Cloudflare連携が楽</li>
+<li><strong>Google Domains</strong>: 使いやすい（※現在はSquarespaceに移行）</li>
+<li><strong>お名前.com</strong>: 日本語サポート</li>
+</ul>
+<h3>DNS設定</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-makefile"><span class="hljs-section">Type: CNAME</span>
+<span class="hljs-section">Name: blog</span>
+<span class="hljs-section">Target: your-blog.pages.dev</span></code></pre><p>Cloudflare Pagesの設定画面で「Custom domains」→ドメインを追加</p>
+<h2>運用のヒント</h2>
+<h3>画像の最適化</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># ImageMagickで圧縮</span>
+find ./public/blog/assets -name <span class="hljs-string">&quot;*.jpg&quot;</span> -<span class="hljs-built_in">exec</span> convert {} -quality 80 {} \;
+
+<span class="hljs-comment"># WebPに変換</span>
+find ./public/blog/assets -name <span class="hljs-string">&quot;*.jpg&quot;</span> -<span class="hljs-built_in">exec</span> cwebp {} -q 80 -o {}.webp \;</code></pre><h3>アクセス解析の導入</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-html"><span class="hljs-comment">&lt;!-- Cloudflare Web Analytics（無料） --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> 
+  <span class="hljs-attr">defer</span> 
+  <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;https://static.cloudflareinsights.com/beacon.min.js&#x27;</span> 
+  <span class="hljs-attr">data-cf-beacon</span>=<span class="hljs-string">&#x27;{&quot;token&quot;: &quot;your-token&quot;}&#x27;</span>
+&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre><h3>OGP画像の自動生成</h3>
+<details>
+<summary>OGP画像生成スクリプトの例</summary>
+
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { createCanvas, loadImage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;canvas&#x27;</span>;
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generateOGImage</span>(<span class="hljs-params"><span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">outputPath</span>: <span class="hljs-built_in">string</span></span>) {
+  <span class="hljs-keyword">const</span> canvas = <span class="hljs-title function_">createCanvas</span>(<span class="hljs-number">1200</span>, <span class="hljs-number">630</span>);
+  <span class="hljs-keyword">const</span> ctx = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&#x27;2d&#x27;</span>);
+
+  <span class="hljs-comment">// 背景</span>
+  ctx.<span class="hljs-property">fillStyle</span> = <span class="hljs-string">&#x27;#1a1a2e&#x27;</span>;
+  ctx.<span class="hljs-title function_">fillRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">630</span>);
+
+  <span class="hljs-comment">// タイトル</span>
+  ctx.<span class="hljs-property">fillStyle</span> = <span class="hljs-string">&#x27;#ffffff&#x27;</span>;
+  ctx.<span class="hljs-property">font</span> = <span class="hljs-string">&#x27;bold 48px sans-serif&#x27;</span>;
+  ctx.<span class="hljs-title function_">fillText</span>(title, <span class="hljs-number">80</span>, <span class="hljs-number">300</span>, <span class="hljs-number">1040</span>);
+
+  <span class="hljs-comment">// ファイル出力</span>
+  <span class="hljs-keyword">const</span> buffer = canvas.<span class="hljs-title function_">toBuffer</span>(<span class="hljs-string">&#x27;image/png&#x27;</span>);
+  <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">writeFile</span>(outputPath, buffer);
+}</code></pre></details>
+
+<h2>シリーズのまとめ</h2>
+<p>全12回のシリーズを完走おめでとうございます！ 🎉</p>
+<h3>学んだこと</h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Part 1 (#01-#05)</td>
+<td>面白い記事の書き方</td>
+</tr>
+<tr>
+<td>Part 2 (#06-#09)</td>
+<td>ブログ運営のテクニック</td>
+</tr>
+<tr>
+<td>Part 3 (#10-#11)</td>
+<td>自作ブログの構築</td>
+</tr>
+</tbody></table>
+<h3>これからのステップ</h3>
+<ol>
+<li><strong>記事を書き続ける</strong> - <a href="/sample-blog/blog/blog-start-09-consistency.html">継続のコツ</a>を実践</li>
+<li><strong>改善を続ける</strong> - デザイン、機能、パフォーマンス</li>
+<li><strong>コミュニティに参加</strong> - 仲間を見つける</li>
+<li><strong>フィードバックを受ける</strong> - 読者の声を聞く</li>
+</ol>
+<h3>最後のメッセージ</h3>
+<blockquote>
+<p>「完璧を目指すより、まず公開する」</p>
+</blockquote>
+<p>ブログは<strong>育てるもの</strong>です。最初は粗削りでも、少しずつ改善していけばいい。</p>
+<p>大切なのは<strong>始めること</strong>、そして<strong>続けること</strong>。</p>
+<p>あなたのブログの成功を心から応援しています！ 🚀</p>
+<hr>
+<p><strong>シリーズトップ</strong>: <a href="/sample-blog/blog/blog-start-00-introduction.html">シリーズ概要と目次</a></p>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-10-build-blog-part1.html">自作ブログ構築（前編）</a></p>
+</article></div>
+    <script>window.__POST_SLUG__="blog-start-11-build-blog-part2"</script>
+  </body>
+</html>

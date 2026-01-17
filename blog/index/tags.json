@@ -1,0 +1,137 @@
+{
+  "test": [
+    "ArticleTest",
+    "サブフォルダ内記事テスト"
+  ],
+  "markdown": [
+    "ArticleTest"
+  ],
+  "sample": [
+    "ArticleTest"
+  ],
+  "ui": [
+    "ArticleTest"
+  ],
+  "サンプルシリーズ": [
+    "blog-start-00-introduction",
+    "blog-start-01-theme-selection",
+    "blog-start-02-title-techniques",
+    "blog-start-03-article-structure",
+    "blog-start-04-formatting",
+    "blog-start-05-images",
+    "blog-start-06-code-blocks",
+    "blog-start-07-tags-categories",
+    "blog-start-08-seo-basics",
+    "blog-start-09-consistency",
+    "blog-start-10-build-blog-part1",
+    "blog-start-11-build-blog-part2"
+  ],
+  "ブログ入門": [
+    "blog-start-00-introduction",
+    "blog-start-01-theme-selection",
+    "blog-start-02-title-techniques",
+    "blog-start-03-article-structure",
+    "blog-start-04-formatting",
+    "blog-start-05-images",
+    "blog-start-06-code-blocks",
+    "blog-start-07-tags-categories",
+    "blog-start-08-seo-basics",
+    "blog-start-09-consistency",
+    "blog-start-10-build-blog-part1",
+    "blog-start-11-build-blog-part2"
+  ],
+  "初心者向け": [
+    "blog-start-00-introduction"
+  ],
+  "テーマ選び": [
+    "blog-start-01-theme-selection"
+  ],
+  "ネタ探し": [
+    "blog-start-01-theme-selection"
+  ],
+  "タイトル": [
+    "blog-start-02-title-techniques"
+  ],
+  "コピーライティング": [
+    "blog-start-02-title-techniques"
+  ],
+  "文章構成": [
+    "blog-start-03-article-structure"
+  ],
+  "ライティング": [
+    "blog-start-03-article-structure"
+  ],
+  "Markdown": [
+    "blog-start-04-formatting"
+  ],
+  "書式": [
+    "blog-start-04-formatting"
+  ],
+  "画像": [
+    "blog-start-05-images"
+  ],
+  "ビジュアル": [
+    "blog-start-05-images"
+  ],
+  "コードブロック": [
+    "blog-start-06-code-blocks"
+  ],
+  "技術記事": [
+    "blog-start-06-code-blocks"
+  ],
+  "タグ": [
+    "blog-start-07-tags-categories"
+  ],
+  "カテゴリ": [
+    "blog-start-07-tags-categories"
+  ],
+  "整理術": [
+    "blog-start-07-tags-categories"
+  ],
+  "SEO": [
+    "blog-start-08-seo-basics"
+  ],
+  "検索エンジン": [
+    "blog-start-08-seo-basics"
+  ],
+  "マーケティング": [
+    "blog-start-08-seo-basics"
+  ],
+  "継続": [
+    "blog-start-09-consistency"
+  ],
+  "習慣化": [
+    "blog-start-09-consistency"
+  ],
+  "モチベーション": [
+    "blog-start-09-consistency"
+  ],
+  "自作ブログ": [
+    "blog-start-10-build-blog-part1",
+    "blog-start-11-build-blog-part2"
+  ],
+  "技術選定": [
+    "blog-start-10-build-blog-part1"
+  ],
+  "React": [
+    "blog-start-10-build-blog-part1"
+  ],
+  "Vite": [
+    "blog-start-10-build-blog-part1"
+  ],
+  "デプロイ": [
+    "blog-start-11-build-blog-part2"
+  ],
+  "Cloudflare Pages": [
+    "blog-start-11-build-blog-part2"
+  ],
+  "CI/CD": [
+    "blog-start-11-build-blog-part2"
+  ],
+  "obsidian": [
+    "サブフォルダ内記事テスト"
+  ],
+  "notes": [
+    "サブフォルダ内記事テスト"
+  ]
+}

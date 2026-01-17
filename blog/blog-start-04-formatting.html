@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログの始め方入門 #04 - 書式テクニック</title>
+    <script type="module" crossorigin src="/sample-blog/assets/index-DtQNsCsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/sample-blog/assets/index-BM310Bkd.css">
+  <meta name="description" content="ブログの始め方入門 04 - 書式テクニック">
+    <meta property="og:title" content="ブログの始め方入門 #04 - 書式テクニック">
+    <meta property="og:description" content="ブログの始め方入門 04 - 書式テクニック">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1517842645767-c639042777db?w=800">
+    <meta property="og:url" content="/sample-blog/blog/blog-start-04-formatting.html">
+    <link rel="canonical" href="/sample-blog/blog/blog-start-04-formatting.html">
+  </head>
+  <body>
+    <div id="root"><article class="post-content" data-post="blog-start-04-formatting"><h1>ブログの始め方入門 #04 - 書式テクニック</h1>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-03-article-structure.html">読みやすい文章構成</a></p>
+<hr>
+<h2>Markdownとは？</h2>
+<p><strong>Markdown</strong>は、シンプルな記法で文書を装飾できる軽量マークアップ言語です。</p>
+<p>HTMLを直接書くよりも圧倒的に楽で、多くのブログプラットフォームやObsidian、NotionなどのツールでサポートされIています。</p>
+<blockquote>
+<p>「プレーンテキストで書いて、リッチなドキュメントを生成する」</p>
+<p>これがMarkdownの哲学です。</p>
+</blockquote>
+<h2>基本の書式一覧</h2>
+<h3>テキスト装飾</h3>
+<table>
+<thead>
+<tr>
+<th>記法</th>
+<th>表示</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>**太字**</code></td>
+<td><strong>太字</strong></td>
+<td>重要な単語の強調</td>
+</tr>
+<tr>
+<td><code>*斜体*</code></td>
+<td><em>斜体</em></td>
+<td>専門用語、外国語</td>
+</tr>
+<tr>
+<td><code>~~打ち消し~~</code></td>
+<td><del>打ち消し</del></td>
+<td>訂正、古い情報</td>
+</tr>
+<tr>
+<td><code>`インラインコード`</code></td>
+<td><code>インラインコード</code></td>
+<td>コマンド、コード片</td>
+</tr>
+<tr>
+<td><code>***太字斜体***</code></td>
+<td><em><strong>太字斜体</strong></em></td>
+<td>特に強調したい場合</td>
+</tr>
+</tbody></table>
+<h3>使い分けのポイント</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">正しい使い方:
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**太字**</span>は1段落に1〜2箇所まで
+<span class="hljs-bullet">-</span> <span class="hljs-emphasis">*斜体*</span>は英語では強調、日本語ではあまり使わない
+<span class="hljs-bullet">-</span> <span class="hljs-code">`コード`</span>は技術用語やファイル名に
+
+悪い使い方:
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**この文章は**</span>すべて<span class="hljs-strong">**太字**</span>にすると<span class="hljs-strong">**読みにくい**</span></code></pre><h2>見出しとリスト</h2>
+<h3>見出しの階層</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown"><span class="hljs-section"># h1 - 記事タイトル（1つだけ）</span>
+<span class="hljs-section">## h2 - 大見出し</span>
+<span class="hljs-section">### h3 - 中見出し</span>
+<span class="hljs-section">#### h4 - 小見出し</span>
+<span class="hljs-section">##### h5 - 補足的な見出し</span>
+<span class="hljs-section">###### h6 - 最小の見出し</span></code></pre><blockquote>
+<p>⚠️ h1は記事に1つだけ。本文では<strong>h2から始める</strong>のが基本です。</p>
+</blockquote>
+<h3>リストの種類</h3>
+<p><strong>箇条書き</strong>:</p>
+<ul>
+<li>項目A</li>
+<li>項目B<ul>
+<li>ネストした項目</li>
+<li>もう一つ</li>
+</ul>
+</li>
+<li>項目C</li>
+</ul>
+<p><strong>番号付きリスト</strong>:</p>
+<ol>
+<li>最初のステップ</li>
+<li>次のステップ</li>
+<li>最後のステップ</li>
+</ol>
+<p><strong>チェックリスト</strong>:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完了したタスク</li>
+<li><input disabled="" type="checkbox"> 未完了のタスク</li>
+<li><input disabled="" type="checkbox"> もう一つのタスク</li>
+</ul>
+<h2>引用とコールアウト</h2>
+<h3>基本の引用</h3>
+<blockquote>
+<p>これは引用です。<br>複数行にまたがることもできます。</p>
+</blockquote>
+<h3>ネスト引用</h3>
+<blockquote>
+<p>第一階層の引用</p>
+<blockquote>
+<p>第二階層の引用</p>
+<blockquote>
+<p>第三階層の引用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3>引用の活用例</h3>
+<p>引用は「他者の言葉」だけでなく、<strong>注目してほしい文章</strong>にも使えます。</p>
+<blockquote>
+<p>💡 <strong>Tip</strong>: 引用の冒頭に絵文字を置くと、視覚的に目立ちます。</p>
+</blockquote>
+<blockquote>
+<p>⚠️ <strong>Warning</strong>: 引用を使いすぎると、かえって読みにくくなります。</p>
+</blockquote>
+<blockquote>
+<p>📝 <strong>Note</strong>: 補足情報を伝えるのにも効果的です。</p>
+</blockquote>
+<h2>リンクと画像</h2>
+<h3>リンクの記法</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">[<span class="hljs-string">表示テキスト</span>](<span class="hljs-link">URL</span>)
+[<span class="hljs-string">Google</span>](<span class="hljs-link">https://www.google.com</span>)</code></pre><p>結果: <a href="https://www.google.com">Google</a></p>
+<h3>内部リンク（Obsidian形式）</h3>
+<p>Obsidian形式のリンクは以下の4つのパターンがあります：</p>
+<table>
+<thead>
+<tr>
+<th>パターン</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[[article]]</code></td>
+<td>基本形式</td>
+</tr>
+<tr>
+<td><code>[[article|text]]</code></td>
+<td>エイリアス付き</td>
+</tr>
+<tr>
+<td><code>[[article#heading]]</code></td>
+<td>見出し指定</td>
+</tr>
+<tr>
+<td><code>[[article#heading|text]]</code></td>
+<td>見出し+エイリアス</td>
+</tr>
+</tbody></table>
+<p>例: <a href="/sample-blog/blog/blog-start-01-theme-selection.html">テーマの選び方の記事</a></p>
+<p>見出し指定例: <a href="/sample-blog/blog/blog-start-03-article-structure.html#prep%E6%B3%95%E6%9C%80%E5%BC%B7%E3%81%AE%E8%AB%96%E7%90%86%E6%A7%8B%E6%88%90">前回のPREP法の解説</a></p>
+<h3>画像の挿入</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-text">![代替テキスト](https://example.com/image.png)</code></pre><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/400px-Markdown-mark.svg.png" alt="Markdownのロゴ"></p>
+<h2>テーブル（表）</h2>
+<h3>基本構文</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">| 列1 | 列2 | 列3 |
+| --- | --- | --- |
+| A1 | A2 | A3 |
+| B1 | B2 | B3 |</code></pre><h3>配置の指定</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">| 左寄せ | 中央寄せ | 右寄せ |
+| :--- | :---: | ---: |
+| Left | Center | Right |</code></pre><table>
+<thead>
+<tr>
+<th align="left">左寄せ</th>
+<th align="center">中央寄せ</th>
+<th align="right">右寄せ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Left</td>
+<td align="center">Center</td>
+<td align="right">Right</td>
+</tr>
+<tr>
+<td align="left">データ</td>
+<td align="center">データ</td>
+<td align="right">123</td>
+</tr>
+</tbody></table>
+<h3>テーブル作成のコツ</h3>
+<p>テーブルは<strong>比較情報</strong>に最適です。</p>
+<table>
+<thead>
+<tr>
+<th align="center">無料ブログ</th>
+<th align="center">有料ブログ</th>
+<th align="center">自作ブログ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">簡単</td>
+<td align="center">普通</td>
+<td align="center">難しい</td>
+</tr>
+<tr>
+<td align="center">無料</td>
+<td align="center">月額1000円〜</td>
+<td align="center">サーバー代のみ</td>
+</tr>
+<tr>
+<td align="center">カスタマイズ×</td>
+<td align="center">カスタマイズ△</td>
+<td align="center">カスタマイズ◎</td>
+</tr>
+</tbody></table>
+<h2>コードブロック</h2>
+<h3>インラインコード</h3>
+<p>文中で <code>const x = 1</code> のようにコードを示すときに使います。</p>
+<h3>ブロックコード</h3>
+<p>言語名を指定すると、シンタックスハイライトが効きます。</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">greeting</span> = (<span class="hljs-params">name</span>) =&gt; {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>);
+};
+
+<span class="hljs-title function_">greeting</span>(<span class="hljs-string">&quot;World&quot;</span>);</code></pre><pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">greeting</span>(<span class="hljs-params">name</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Hello, <span class="hljs-subst">{name}</span>!&quot;</span>)
+
+greeting(<span class="hljs-string">&quot;World&quot;</span>)</code></pre><pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># ファイルの一覧を表示</span>
+<span class="hljs-built_in">ls</span> -la
+
+<span class="hljs-comment"># Gitの状態を確認</span>
+git status</code></pre><p>コードブロックの詳しい使い方は <a href="/sample-blog/blog/blog-start-06-code-blocks.html#%E8%A8%80%E8%AA%9E%E5%88%A5%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB">コードブロックの活用記事</a> で解説します。</p>
+<h2>数式（KaTeX）</h2>
+<h3>インライン数式</h3>
+<p>文中に <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E = mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal">m</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> のように数式を埋め込めます。</p>
+<p>ピタゴラスの定理: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2 + b^2 = c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<h3>ブロック数式</h3>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n} i = \frac{n(n+1)}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><p>二次方程式の解の公式:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><mrow><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2764em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5904em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">±</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9134em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">4</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span></span></span><span style="top:-2.8734em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1266em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><h3>数式の活用シーン</h3>
+<ul>
+<li>技術ブログでの公式説明</li>
+<li>データサイエンス系の記事</li>
+<li>教育コンテンツ</li>
+</ul>
+<h2>脚注</h2>
+<p>脚注は補足情報を本文の流れを妨げずに追加できます。<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup></p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">本文中に脚注を入れます[^1]
+</code></pre><p>技術的な詳細や出典の明記に便利です。<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup></p>
+<h2>折りたたみ（details）</h2>
+<details>
+<summary>クリックして展開</summary>
+
+<p>長い補足情報や、読みたい人だけが読めばいい内容を隠すのに便利です。</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// 隠れたコードサンプル</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">secretFunction</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Found me!&quot;</span>;
+};</code></pre></details>
+
+<h3>使用シーン</h3>
+<ul>
+<li>長いコードサンプル</li>
+<li>ネタバレを含む内容</li>
+<li>上級者向けの詳細説明</li>
+</ul>
+<h2>水平線</h2>
+<p>セクションの区切りに使います。</p>
+<hr>
+<p>3種類の書き方がありますが、どれも同じです：</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">---
+<span class="hljs-strong">***
+__<span class="hljs-emphasis">_</span></span></code></pre><h2>キーボードとハイライト</h2>
+<p><kbd>Ctrl</kbd> + <kbd>C</kbd> でコピー</p>
+<p><kbd>Cmd</kbd> + <kbd>V</kbd> で貼り付け</p>
+<p><mark>ハイライトされたテキスト</mark>はHTMLタグで実現できます。</p>
+<h2>定義リスト</h2>
+<p>Markdown<br>: 軽量マークアップ言語の一つ。プレーンテキストで書式を指定できる。</p>
+<p>HTML<br>: HyperText Markup Language。Webページの構造を定義する言語。</p>
+<p>CSS<br>: Cascading Style Sheets。Webページの見た目を定義する言語。</p>
+<h2>書式を使いすぎない</h2>
+<p>最後に重要な注意点。</p>
+<blockquote>
+<p><strong>書式は調味料のようなもの</strong></p>
+<p>入れすぎると台無しになります</p>
+</blockquote>
+<h3>良い例</h3>
+<p>適度に<strong>太字</strong>を使い、必要な箇所だけを強調しています。</p>
+<h3>悪い例</h3>
+<p><strong>この文章は</strong>すべての<strong>単語に</strong>太字を<strong>使っている</strong>ので、<em>どこが</em>重要か<del>わからなく</del>なって<code>しまいます</code>。</p>
+<h2>まとめ</h2>
+<table>
+<thead>
+<tr>
+<th>書式</th>
+<th>主な用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>太字</strong></td>
+<td>重要な単語を強調</td>
+</tr>
+<tr>
+<td><em>斜体</em></td>
+<td>専門用語、外国語</td>
+</tr>
+<tr>
+<td><code>コード</code></td>
+<td>コマンド、関数名</td>
+</tr>
+<tr>
+<td>&gt; 引用</td>
+<td>他者の言葉、注目文</td>
+</tr>
+<tr>
+<td>リスト</td>
+<td>箇条書き、手順</td>
+</tr>
+<tr>
+<td>テーブル</td>
+<td>比較情報</td>
+</tr>
+</tbody></table>
+<p>書式は「読みやすさ」のためにあります。使いすぎに注意して、効果的に活用しましょう 📝</p>
+<hr>
+<p><strong>次回</strong>: <a href="/sample-blog/blog/blog-start-05-images.html">画像の活用法 - 記事を彩るビジュアル要素</a></p>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-03-article-structure.html">読みやすい文章構成</a></p>
+<section class="footnotes"><ol><li id="fn-1"><p>脚注は記事の最後にまとめて表示されます。</p> <a href="#fnref-1" class="footnote-backref">&larr;</a></li><li id="fn-2"><p>出典: Markdown Guide (<a href="https://www.markdownguide.org/">https://www.markdownguide.org/</a>)</p> <a href="#fnref-2" class="footnote-backref">&larr;</a></li></ol></section></article></div>
+    <script>window.__POST_SLUG__="blog-start-04-formatting"</script>
+  </body>
+</html>

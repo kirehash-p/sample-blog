@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログの始め方入門 #05 - 画像の活用法</title>
+    <script type="module" crossorigin src="/sample-blog/assets/index-DtQNsCsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/sample-blog/assets/index-BM310Bkd.css">
+  <meta name="description" content="ブログの始め方入門 05 - 画像の活用法">
+    <meta property="og:title" content="ブログの始め方入門 #05 - 画像の活用法">
+    <meta property="og:description" content="ブログの始め方入門 05 - 画像の活用法">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800">
+    <meta property="og:url" content="/sample-blog/blog/blog-start-05-images.html">
+    <link rel="canonical" href="/sample-blog/blog/blog-start-05-images.html">
+  </head>
+  <body>
+    <div id="root"><article class="post-content" data-post="blog-start-05-images"><h1>ブログの始め方入門 #05 - 画像の活用法</h1>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-04-formatting.html">書式テクニック</a></p>
+<hr>
+<h2>画像が記事の価値を高める</h2>
+<blockquote>
+<p>「百聞は一見にしかず」</p>
+</blockquote>
+<p>この言葉はブログでも真実です。適切な画像は：</p>
+<ul>
+<li>読者の注目を引く</li>
+<li>複雑な概念を視覚的に説明する</li>
+<li>記事の滞在時間を延ばす</li>
+<li>SNSでシェアされやすくなる</li>
+</ul>
+<h2>画像の基本的な挿入方法</h2>
+<h3>Markdown記法</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-text">![代替テキスト](https://example.com/image.png)</code></pre><p><strong>代替テキスト</strong>（alt属性）は重要です：</p>
+<ul>
+<li>画像が表示されないときに表示される</li>
+<li>スクリーンリーダーで読み上げられる</li>
+<li>SEOに影響する</li>
+</ul>
+<h3>実際の例</h3>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Typing-computer-keyboard.jpg/1200px-Typing-computer-keyboard.jpg" alt="タイピングする手元の写真"></p>
+<h2>画像サイズとレイアウト</h2>
+<h3>サイズの考慮</h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>推奨幅</th>
+<th>ファイルサイズ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>カバー画像</td>
+<td>1200px</td>
+<td>200KB以下</td>
+</tr>
+<tr>
+<td>本文中の画像</td>
+<td>800px</td>
+<td>150KB以下</td>
+</tr>
+<tr>
+<td>サムネイル</td>
+<td>400px</td>
+<td>50KB以下</td>
+</tr>
+</tbody></table>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>読み込み時間</mtext><mo>∝</mo><mtext>ファイルサイズ</mtext></mrow><annotation encoding="application/x-tex">\text{読み込み時間} \propto \text{ファイルサイズ}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">読み込み時間</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∝</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord cjk_fallback">ファイルサイズ</span></span></span></span></span></span><p>大きすぎる画像は読み込みを遅くし、読者の離脱を招きます。</p>
+<h3>HTMLでのサイズ指定</h3>
+<p>Markdownだけではサイズ指定が難しいため、HTMLを使うこともあります：</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;画像URL&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;説明&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;600&quot;</span>&gt;</span></code></pre><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/600px-Placeholder_view_vector.svg.png" alt="プレースホルダー画像" width="400">
+
+<h3>レイアウトのバリエーション</h3>
+<p><strong>中央配置</strong>:<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/600px-Placeholder_view_vector.svg.png" alt="中央配置の画像" style="display: block; margin: 0 auto; width: 300px;"></p>
+<p><strong>横並び</strong>:</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <img src="https://placehold.co/200x150/png" alt="画像1" style="flex: 1; min-width: 150px;">
+  <img src="https://placehold.co/200x150/png" alt="画像2" style="flex: 1; min-width: 150px;">
+  <img src="https://placehold.co/200x150/png" alt="画像3" style="flex: 1; min-width: 150px;">
+</div>
+
+<h2>フリー画像の入手先</h2>
+<h3>おすすめのフリー素材サイト</h3>
+<ol>
+<li><strong>Unsplash</strong> - 高品質な写真</li>
+<li><strong>Pexels</strong> - 写真とビデオ</li>
+<li><strong>Pixabay</strong> - 写真、イラスト、ベクター</li>
+<li><strong>Wikimedia Commons</strong> - パブリックドメイン画像</li>
+</ol>
+<h3>ライセンスの確認</h3>
+<table>
+<thead>
+<tr>
+<th>ライセンス</th>
+<th>商用利用</th>
+<th>クレジット表記</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CC0</td>
+<td>◎</td>
+<td>不要</td>
+</tr>
+<tr>
+<td>CC BY</td>
+<td>◎</td>
+<td>必要</td>
+</tr>
+<tr>
+<td>CC BY-SA</td>
+<td>◎</td>
+<td>必要 + 同条件</td>
+</tr>
+<tr>
+<td>CC BY-NC</td>
+<td>×</td>
+<td>必要</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>注意</strong>: ライセンスは必ず確認してください。著作権侵害は深刻な問題です。</p>
+</blockquote>
+<h3>Wikimedia Commonsの活用</h3>
+<p>Wikipedia関連のプロジェクトで使われている画像は、多くがフリーで使えます。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%28remastered%29.jpg/600px-The_Blue_Marble_%28remastered%29.jpg" alt="地球の写真（NASA撮影）"></p>
+<p><em>出典: NASA, Public Domain</em></p>
+<h2>スクリーンショットの撮り方</h2>
+<p>技術系ブログでは、スクリーンショットが必須です。</p>
+<h3>OS別のショートカット</h3>
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>全画面</th>
+<th>範囲選択</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows</td>
+<td><kbd>Win</kbd>+<kbd>PrintScreen</kbd></td>
+<td><kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>3</kbd></td>
+<td><kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>4</kbd></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><kbd>PrintScreen</kbd></td>
+<td><kbd>Shift</kbd>+<kbd>PrintScreen</kbd></td>
+</tr>
+</tbody></table>
+<h3>スクリーンショットのベストプラクティス</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 不要な情報を切り取る</li>
+<li><input checked="" disabled="" type="checkbox"> 注目してほしい部分をハイライト</li>
+<li><input checked="" disabled="" type="checkbox"> 個人情報を隠す</li>
+<li><input checked="" disabled="" type="checkbox"> 適切なサイズに圧縮</li>
+</ul>
+<details>
+<summary>おすすめのスクリーンショットツール</summary>
+
+<p><strong>無料ツール</strong>:</p>
+<ul>
+<li><strong>Snipping Tool</strong> (Windows) - 標準搭載</li>
+<li><strong>Screenshot.app</strong> (macOS) - 標準搭載</li>
+<li><strong>Flameshot</strong> (Linux) - 高機能フリーソフト</li>
+</ul>
+<p><strong>有料ツール</strong>:</p>
+<ul>
+<li><strong>CleanShot X</strong> (macOS) - プロ向け機能</li>
+<li><strong>ScreenPal</strong> - 動画も撮れる</li>
+</ul>
+</details>
+
+<h2>図解の作成</h2>
+<h3>ツールの選択</h3>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>特徴</th>
+<th>価格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Excalidraw</td>
+<td>手書き風、軽量</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>draw.io</td>
+<td>多機能、無料</td>
+<td>無料</td>
+</tr>
+<tr>
+<td>Figma</td>
+<td>プロ向け、共同編集</td>
+<td>無料〜</td>
+</tr>
+<tr>
+<td>Canva</td>
+<td>テンプレート豊富</td>
+<td>無料〜</td>
+</tr>
+</tbody></table>
+<h3>図解のポイント</h3>
+<ol>
+<li><strong>シンプルに</strong>: 1つの図に1つのメッセージ</li>
+<li><strong>色は3色まで</strong>: 多すぎると見にくい</li>
+<li><strong>矢印を活用</strong>: 流れを示す</li>
+<li><strong>余白を確保</strong>: 詰め込みすぎない</li>
+</ol>
+<h3>例：フローチャート</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs">┌─────────┐     ┌─────────┐     ┌─────────┐
+│ 記事を  │ ──▶ │ 画像を  │ ──▶ │ 公開    │
+│ 書く    │     │ 追加    │     │ する    │
+└─────────┘     └─────────┘     └─────────┘</code></pre><h2>画像の最適化</h2>
+<h3>なぜ最適化が必要か</h3>
+<p>Webサイトの表示速度は、ユーザー体験とSEOに直結します。</p>
+<blockquote>
+<p>Google によると、ページの読み込みが3秒を超えると53%のユーザーが離脱します。<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup></p>
+</blockquote>
+<h3>画像形式の選択</h3>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>特徴</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JPEG</td>
+<td>写真向け、圧縮率高い</td>
+<td>写真</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>透過対応、可逆圧縮</td>
+<td>スクリーンショット</td>
+</tr>
+<tr>
+<td>WebP</td>
+<td>高圧縮、モダン</td>
+<td>すべて（推奨）</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>ベクター、拡大劣化なし</td>
+<td>アイコン、ロゴ</td>
+</tr>
+</tbody></table>
+<h3>圧縮ツール</h3>
+<p><strong>オンラインツール</strong>:</p>
+<ul>
+<li>TinyPNG (<a href="https://tinypng.com/">https://tinypng.com/</a>)</li>
+<li>Squoosh (<a href="https://squoosh.app/">https://squoosh.app/</a>)</li>
+</ul>
+<p><strong>コマンドライン</strong>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># ImageMagickで圧縮</span>
+convert input.jpg -quality 80 output.jpg
+
+<span class="hljs-comment"># WebPに変換</span>
+cwebp input.png -q 80 -o output.webp</code></pre><h2>アクセシビリティへの配慮</h2>
+<h3>alt属性の書き方</h3>
+<p><strong>悪い例</strong>:</p>
+<ul>
+<li><code>![image1](photo.jpg)</code> → 意味のない名前</li>
+<li><code>![](photo.jpg)</code> → altが空</li>
+</ul>
+<p><strong>良い例</strong>:</p>
+<ul>
+<li><code>![夕焼けに染まる海岸線の写真](sunset.jpg)</code> → 具体的な説明</li>
+</ul>
+<h3>色覚多様性への配慮</h3>
+<p>赤と緑だけで情報を区別しないでください。約8%の男性が色覚異常を持っています。</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs">✅ 色 + 形 + テキストで区別
+❌ 色だけで区別</code></pre><h2>画像管理のヒント</h2>
+<h3>フォルダ構成の例</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-css">blog/
+├── posts/
+│   ├── <span class="hljs-number">2025</span>-<span class="hljs-number">01</span>-<span class="hljs-selector-tag">article</span>/
+│   │   ├── index<span class="hljs-selector-class">.md</span>
+│   │   └── images/
+│   │       ├── cover<span class="hljs-selector-class">.jpg</span>
+│   │       ├── <span class="hljs-selector-tag">figure</span>-<span class="hljs-number">01</span><span class="hljs-selector-class">.png</span>
+│   │       └── screenshot-<span class="hljs-number">01</span><span class="hljs-selector-class">.png</span></code></pre><h3>命名規則</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-css">❌ IMG_20250101_123456<span class="hljs-selector-class">.jpg</span>
+❌ スクリーンショット <span class="hljs-number">2025</span>-<span class="hljs-number">01</span>-<span class="hljs-number">01</span> <span class="hljs-number">12.34</span>.<span class="hljs-number">56</span><span class="hljs-selector-class">.png</span>
+
+✅ cover-blog-intro<span class="hljs-selector-class">.jpg</span>
+✅ <span class="hljs-selector-tag">figure</span>-<span class="hljs-number">01</span>-architecture<span class="hljs-selector-class">.png</span>
+✅ screenshot-vscode-settings<span class="hljs-selector-class">.png</span></code></pre><h2>まとめ</h2>
+<p>画像活用のポイント：</p>
+<ol>
+<li><strong>適切なサイズ</strong>で最適化する</li>
+<li><strong>alt属性</strong>を必ず書く</li>
+<li><strong>ライセンス</strong>を確認する</li>
+<li><strong>図解</strong>で複雑な概念を視覚化</li>
+<li><strong>アクセシビリティ</strong>に配慮する</li>
+</ol>
+<p>画像は記事の価値を大きく高めます。しかし、<strong>必要以上に使わない</strong>ことも大切です。テキストで十分な箇所に画像を入れると、かえって読みにくくなります。</p>
+<p>次回は、技術ブログの要である「コードブロック」の活用法を解説します 💻</p>
+<hr>
+<p><strong>次回</strong>: <a href="/sample-blog/blog/blog-start-06-code-blocks.html">コードブロックの活用 - 技術記事の書き方</a></p>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-04-formatting.html">書式テクニック</a></p>
+<section class="footnotes"><ol><li id="fn-1"><p>Google Research, &quot;The Need for Mobile Speed&quot; (2017)</p> <a href="#fnref-1" class="footnote-backref">&larr;</a></li></ol></section></article></div>
+    <script>window.__POST_SLUG__="blog-start-05-images"</script>
+  </body>
+</html>

@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログの始め方入門 #06 - コードブロックの活用</title>
+    <script type="module" crossorigin src="/sample-blog/assets/index-DtQNsCsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/sample-blog/assets/index-BM310Bkd.css">
+  <meta name="description" content="ブログの始め方入門 06 - コードブロックの活用">
+    <meta property="og:title" content="ブログの始め方入門 #06 - コードブロックの活用">
+    <meta property="og:description" content="ブログの始め方入門 06 - コードブロックの活用">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800">
+    <meta property="og:url" content="/sample-blog/blog/blog-start-06-code-blocks.html">
+    <link rel="canonical" href="/sample-blog/blog/blog-start-06-code-blocks.html">
+  </head>
+  <body>
+    <div id="root"><article class="post-content" data-post="blog-start-06-code-blocks"><h1>ブログの始め方入門 #06 - コードブロックの活用</h1>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-05-images.html">画像の活用法</a></p>
+<hr>
+<h2>技術ブログの核心 = コードブロック</h2>
+<p>技術ブログにおいて、<strong>コードブロック</strong>は最も重要な要素です。</p>
+<p>読者が求めているのは「コピーして動くコード」。適切なコードブロックの使い方をマスターしましょう。</p>
+<h2>基本的な書き方</h2>
+<h3>インラインコード</h3>
+<p>文中で <code>const x = 1</code> のように短いコードを示すときに使います。</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown">変数 <span class="hljs-code">`count`</span> を <span class="hljs-code">`0`</span> で初期化します。</code></pre><p>結果: 変数 <code>count</code> を <code>0</code> で初期化します。</p>
+<h3>コードブロック（フェンスドコード）</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown"><span class="hljs-code">```言語名
+コードの内容
+```</span></code></pre><p><strong>言語名を指定する</strong>ことで、シンタックスハイライトが有効になります。</p>
+<h2>言語別のサンプル</h2>
+<h3>JavaScript / TypeScript</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// 配列の操作</span>
+<span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+
+<span class="hljs-keyword">const</span> doubled = numbers.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> n * <span class="hljs-number">2</span>);
+<span class="hljs-keyword">const</span> filtered = numbers.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> n &gt; <span class="hljs-number">2</span>);
+<span class="hljs-keyword">const</span> sum = numbers.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">acc, n</span>) =&gt;</span> acc + n, <span class="hljs-number">0</span>);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>({ doubled, filtered, sum });</code></pre><pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">User</span> {
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">email</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">createdAt</span>: <span class="hljs-title class_">Date</span>;
+}
+
+<span class="hljs-keyword">const</span> createUser = (<span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">email</span>: <span class="hljs-built_in">string</span>): <span class="hljs-function"><span class="hljs-params">User</span> =&gt;</span> ({
+  <span class="hljs-attr">id</span>: crypto.<span class="hljs-title function_">randomUUID</span>(),
+  name,
+  email,
+  <span class="hljs-attr">createdAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(),
+});</code></pre><h3>Python</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-python"><span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass
+<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
+
+<span class="hljs-meta">@dataclass</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Article</span>:
+    title: <span class="hljs-built_in">str</span>
+    content: <span class="hljs-built_in">str</span>
+    tags: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]
+    created_at: datetime = datetime.now()
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">word_count</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.content.split())
+
+<span class="hljs-comment"># 使用例</span>
+article = Article(
+    title=<span class="hljs-string">&quot;ブログの始め方&quot;</span>,
+    content=<span class="hljs-string">&quot;これはサンプル記事です。コードブロックの説明をしています。&quot;</span>,
+    tags=[<span class="hljs-string">&quot;入門&quot;</span>, <span class="hljs-string">&quot;ブログ&quot;</span>]
+)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;文字数: <span class="hljs-subst">{article.word_count()}</span>&quot;</span>)</code></pre><h3>Bash / Shell</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># ブログのセットアップスクリプト</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Setting up blog environment...&quot;</span>
+
+<span class="hljs-comment"># 依存関係のインストール</span>
+npm install
+
+<span class="hljs-comment"># 開発サーバーの起動</span>
+npm run dev &amp;
+
+<span class="hljs-comment"># ビルド</span>
+npm run build
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Setup complete! 🎉&quot;</span></code></pre><h3>SQL</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-sql"><span class="hljs-comment">-- 記事の取得クエリ</span>
+<span class="hljs-keyword">SELECT</span> 
+    a.id,
+    a.title,
+    a.content,
+    u.name <span class="hljs-keyword">AS</span> author_name,
+    <span class="hljs-built_in">COUNT</span>(c.id) <span class="hljs-keyword">AS</span> comment_count
+<span class="hljs-keyword">FROM</span> articles a
+<span class="hljs-keyword">JOIN</span> users u <span class="hljs-keyword">ON</span> a.author_id <span class="hljs-operator">=</span> u.id
+<span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> comments c <span class="hljs-keyword">ON</span> a.id <span class="hljs-operator">=</span> c.article_id
+<span class="hljs-keyword">WHERE</span> a.published <span class="hljs-operator">=</span> <span class="hljs-literal">TRUE</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> a.id, u.name
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> a.created_at <span class="hljs-keyword">DESC</span>
+LIMIT <span class="hljs-number">10</span>;</code></pre><h3>JSON</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;my-blog&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;dev&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite build&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;preview&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vite preview&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;react&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^18.2.0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;react-dom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^18.2.0&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre><h3>CSS</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-css"><span class="hljs-comment">/* 記事カードのスタイル */</span>
+<span class="hljs-selector-class">.article-card</span> {
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1.5rem</span>;
+  <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.2s</span> ease;
+}
+
+<span class="hljs-selector-class">.article-card</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">4px</span>);
+}
+
+<span class="hljs-selector-class">.article-card__title</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.25rem</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">0.5rem</span>;
+}</code></pre><h3>HTML</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ja&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Blog<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Blog<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>記事タイトル<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>記事の内容...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre><h2>コードブロックの使い分け</h2>
+<h3>いつインラインを使うか</h3>
+<table>
+<thead>
+<tr>
+<th>シーン</th>
+<th>使うべき記法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>変数名やファイル名に言及</td>
+<td>インライン <code>code</code></td>
+</tr>
+<tr>
+<td>コマンド1つを紹介</td>
+<td>インライン <code>npm install</code></td>
+</tr>
+<tr>
+<td>複数行のコード</td>
+<td>コードブロック</td>
+</tr>
+<tr>
+<td>実行可能なスニペット</td>
+<td>コードブロック</td>
+</tr>
+</tbody></table>
+<h3>diff表示</h3>
+<p>変更箇所を示すときに便利です：</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-diff"><span class="hljs-deletion">- const oldValue = &quot;before&quot;;</span>
+<span class="hljs-addition">+ const newValue = &quot;after&quot;;</span>
+
+  function unchanged() {
+    // この行は変更なし
+  }</code></pre><h2>コードブロックのベストプラクティス</h2>
+<h3>1. 動くコードを書く</h3>
+<blockquote>
+<p>コピー&amp;ペーストして動かないコードは、読者の信頼を失います</p>
+</blockquote>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// ❌ 悪い例：動作に必要な情報が不足</span>
+<span class="hljs-keyword">const</span> result = <span class="hljs-title function_">fetchData</span>();
+
+<span class="hljs-comment">// ✅ 良い例：自己完結している</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://api.example.com/data&#x27;</span>);
+  <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+};
+
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchData</span>();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);</code></pre><h3>2. コメントを適切に入れる</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-python"><span class="hljs-comment"># 入力データの前処理</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">preprocess</span>(<span class="hljs-params">data</span>):
+    <span class="hljs-comment"># 欠損値を平均で埋める</span>
+    data = data.fillna(data.mean())
+    
+    <span class="hljs-comment"># 外れ値を除去（3σルール）</span>
+    mean = data.mean()
+    std = data.std()
+    data = data[(data - mean).<span class="hljs-built_in">abs</span>() &lt;= <span class="hljs-number">3</span> * std]
+    
+    <span class="hljs-keyword">return</span> data</code></pre><h3>3. 長すぎるコードは分割する</h3>
+<p>1つのコードブロックは<strong>30行以内</strong>を目安にしましょう。</p>
+<details>
+<summary>長いコードを折りたたむ例</summary>
+
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-comment">// 完全なAPIクライアントの実装</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">ApiClientConfig</span> {
+  <span class="hljs-attr">baseUrl</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">timeout</span>?: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">headers</span>?: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ApiClient</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-attr">baseUrl</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">private</span> <span class="hljs-attr">timeout</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-keyword">private</span> <span class="hljs-attr">headers</span>: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;;
+
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">config</span>: <span class="hljs-title class_">ApiClientConfig</span></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">baseUrl</span> = config.<span class="hljs-property">baseUrl</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">timeout</span> = config.<span class="hljs-property">timeout</span> ?? <span class="hljs-number">30000</span>;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">headers</span> = {
+      <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+      ...config.<span class="hljs-property">headers</span>,
+    };
+  }
+
+  <span class="hljs-keyword">async</span> get&lt;T&gt;(<span class="hljs-attr">path</span>: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">Promise</span>&lt;T&gt; {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.baseUrl}</span><span class="hljs-subst">${path}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;GET&#x27;</span>,
+      <span class="hljs-attr">headers</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">headers</span>,
+    });
+    <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+  }
+
+  <span class="hljs-keyword">async</span> post&lt;T&gt;(<span class="hljs-attr">path</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">body</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title class_">Promise</span>&lt;T&gt; {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.baseUrl}</span><span class="hljs-subst">${path}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+      <span class="hljs-attr">headers</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">headers</span>,
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(body),
+    });
+    <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+  }
+}</code></pre></details>
+
+<h3>4. エラーハンドリングを含める</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// ✅ エラーハンドリングを含めた例</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchUserData</span>(<span class="hljs-params">userId</span>) {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`/api/users/<span class="hljs-subst">${userId}</span>`</span>);
+    
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP error! status: <span class="hljs-subst">${response.status}</span>`</span>);
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Failed to fetch user:&#x27;</span>, error);
+    <span class="hljs-keyword">throw</span> error;
+  }
+}</code></pre><h2>数式とコードの組み合わせ</h2>
+<p>技術的な説明では、数式とコードを組み合わせると効果的です。</p>
+<h3>例：二分探索</h3>
+<p>二分探索の計算量は <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> です。</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>T</mi><mrow><mo fence="true">(</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo fence="true">)</mo></mrow><mo>+</mo><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(n) = T\left(\frac{n}{2}\right) + O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.836em;vertical-align:-0.686em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">binary_search</span>(<span class="hljs-params">arr, target</span>):
+    left, right = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(arr) - <span class="hljs-number">1</span>
+    
+    <span class="hljs-keyword">while</span> left &lt;= right:
+        mid = (left + right) // <span class="hljs-number">2</span>
+        
+        <span class="hljs-keyword">if</span> arr[mid] == target:
+            <span class="hljs-keyword">return</span> mid
+        <span class="hljs-keyword">elif</span> arr[mid] &lt; target:
+            left = mid + <span class="hljs-number">1</span>
+        <span class="hljs-keyword">else</span>:
+            right = mid - <span class="hljs-number">1</span>
+    
+    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span></code></pre><h2>よくある失敗</h2>
+<h3>❌ 失敗1: 言語指定なし</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-markdown"><span class="hljs-code">```
+const x = 1;  // ハイライトされない
+```</span></code></pre><h3>❌ 失敗2: インデントの乱れ</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// 悪い例</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bad</span>(<span class="hljs-params"></span>){
+<span class="hljs-keyword">let</span> x=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(x){
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x);
+    }
+}</code></pre><pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// 良い例</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">good</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">if</span> (x) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x);
+  }
+}</code></pre><h3>❌ 失敗3: 古いコードをそのまま</h3>
+<p>ライブラリのバージョンや非推奨のAPIに注意しましょう。</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">// ❌ 古い書き方</span>
+<span class="hljs-keyword">var</span> self = <span class="hljs-variable language_">this</span>;
+$.<span class="hljs-title function_">ajax</span>({
+  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/api/data&#x27;</span>,
+  <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) {
+    self.<span class="hljs-title function_">setState</span>({ <span class="hljs-attr">data</span>: data });
+  }
+});
+
+<span class="hljs-comment">// ✅ モダンな書き方</span>
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/api/data&#x27;</span>);
+<span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+<span class="hljs-title function_">setData</span>(data);</code></pre><h2>チェックリスト</h2>
+<p>公開前に確認しましょう：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 言語名を指定しているか</li>
+<li><input checked="" disabled="" type="checkbox"> コピーして動作するか</li>
+<li><input checked="" disabled="" type="checkbox"> 適切なコメントがあるか</li>
+<li><input checked="" disabled="" type="checkbox"> インデントは揃っているか</li>
+<li><input checked="" disabled="" type="checkbox"> 長すぎないか（30行以内）</li>
+</ul>
+<h2>まとめ</h2>
+<p>コードブロック活用のポイント：</p>
+<table>
+<thead>
+<tr>
+<th>ポイント</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>言語を指定</td>
+<td>シンタックスハイライトのため</td>
+</tr>
+<tr>
+<td>動くコードを書く</td>
+<td>読者の信頼を得る</td>
+</tr>
+<tr>
+<td>コメントを入れる</td>
+<td>意図を伝える</td>
+</tr>
+<tr>
+<td>短く保つ</td>
+<td>30行以内を目安に</td>
+</tr>
+</tbody></table>
+<p>次回は、記事の整理に欠かせない「タグとカテゴリ」について解説します 🏷️</p>
+<hr>
+<p><strong>次回</strong>: <a href="/sample-blog/blog/blog-start-07-tags-categories.html">タグとカテゴリ - 記事の整理術</a></p>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-05-images.html">画像の活用法</a></p>
+</article></div>
+    <script>window.__POST_SLUG__="blog-start-06-code-blocks"</script>
+  </body>
+</html>

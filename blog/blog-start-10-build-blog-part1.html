@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログの始め方入門 #10 - 自作ブログ構築（前編）</title>
+    <script type="module" crossorigin src="/sample-blog/assets/index-DtQNsCsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/sample-blog/assets/index-BM310Bkd.css">
+  <meta name="description" content="ブログの始め方入門 10 - 自作ブログ構築（前編）">
+    <meta property="og:title" content="ブログの始め方入門 #10 - 自作ブログ構築（前編）">
+    <meta property="og:description" content="ブログの始め方入門 10 - 自作ブログ構築（前編）">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800">
+    <meta property="og:url" content="/sample-blog/blog/blog-start-10-build-blog-part1.html">
+    <link rel="canonical" href="/sample-blog/blog/blog-start-10-build-blog-part1.html">
+  </head>
+  <body>
+    <div id="root"><article class="post-content" data-post="blog-start-10-build-blog-part1"><h1>ブログの始め方入門 #10 - 自作ブログ構築（前編）</h1>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-09-consistency.html">継続のコツ</a></p>
+<hr>
+<h2>いよいよ自作ブログに挑戦！</h2>
+<p>ここまでで「面白い記事の書き方」と「ブログ運営のテクニック」を学びました。</p>
+<p>最後のPart 3では、<strong>自分だけのブログを構築</strong>する方法を解説します。</p>
+<blockquote>
+<p>⚠️ <strong>注意</strong>: この記事は技術的な内容を含みます。HTML/CSS/JavaScriptの基礎知識があることを前提としています。</p>
+</blockquote>
+<h2>なぜ自作ブログなのか</h2>
+<h3>既存サービスとの比較</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>既存サービス</th>
+<th>自作ブログ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>難易度</td>
+<td>★☆☆☆☆</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td>カスタマイズ</td>
+<td>制限あり</td>
+<td>無制限</td>
+</tr>
+<tr>
+<td>コスト</td>
+<td>無料〜月額1000円</td>
+<td>サーバー代のみ</td>
+</tr>
+<tr>
+<td>所有権</td>
+<td>サービスに依存</td>
+<td>完全に自分のもの</td>
+</tr>
+<tr>
+<td>学習効果</td>
+<td>低い</td>
+<td>高い</td>
+</tr>
+</tbody></table>
+<h3>自作ブログのメリット</h3>
+<ol>
+<li><strong>完全なカスタマイズ</strong>: デザインも機能も思いのまま</li>
+<li><strong>技術力の証明</strong>: ポートフォリオとして最適</li>
+<li><strong>サービス終了リスクなし</strong>: 自分が続ける限り存続</li>
+<li><strong>学習効果</strong>: Web技術を実践的に学べる</li>
+</ol>
+<h2>技術選定</h2>
+<h3>アーキテクチャの選択肢</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-scss">┌────────────────────────────────────────┐
+│           ブログのアーキテクチャ          │
+├────────────────────────────────────────┤
+│                                        │
+│  ① SSG (Static Site Generation)        │
+│     ├── Astro                          │
+│     ├── Next<span class="hljs-selector-class">.js</span> (静的エクスポート)       │
+│     └── Gatsby                         │
+│                                        │
+│  ② SPA (Single Page Application)       │
+│     ├── React + Vite                   │
+│     └── Vue + Vite                     │
+│                                        │
+│  ③ SSR (Server Side Rendering)         │
+│     ├── Next<span class="hljs-selector-class">.js</span>                        │
+│     └── Nuxt<span class="hljs-selector-class">.js</span>                        │
+│                                        │
+└────────────────────────────────────────┘</code></pre><h3>おすすめ: SSG（静的サイト生成）</h3>
+<p>ブログには<strong>SSG</strong>が最適です。理由：</p>
+<ul>
+<li>⚡ 高速（HTMLが事前生成される）</li>
+<li>💰 安価（CDNだけで運用可能）</li>
+<li>🔒 セキュア（サーバーレス）</li>
+<li>📈 SEOに強い</li>
+</ul>
+<h3>このシリーズで使用する技術</h3>
+<table>
+<thead>
+<tr>
+<th>役割</th>
+<th>技術</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>フレームワーク</td>
+<td>React</td>
+<td>最も広く使われている</td>
+</tr>
+<tr>
+<td>ビルドツール</td>
+<td>Vite</td>
+<td>高速、設定簡単</td>
+</tr>
+<tr>
+<td>スタイリング</td>
+<td>Tailwind CSS</td>
+<td>ユーティリティファースト</td>
+</tr>
+<tr>
+<td>Markdown処理</td>
+<td>unified/remark</td>
+<td>柔軟性が高い</td>
+</tr>
+<tr>
+<td>ホスティング</td>
+<td>Cloudflare Pages</td>
+<td>無料、高速</td>
+</tr>
+</tbody></table>
+<h2>プロジェクトのセットアップ</h2>
+<h3>必要な環境</h3>
+<ul>
+<li><strong>Node.js</strong>: 18.x 以上</li>
+<li><strong>npm</strong> または <strong>pnpm</strong></li>
+<li><strong>Git</strong></li>
+</ul>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># バージョン確認</span>
+node --version  <span class="hljs-comment"># v18.x.x 以上</span>
+npm --version   <span class="hljs-comment"># 8.x.x 以上</span></code></pre><h3>プロジェクト作成</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># Vite + React + TypeScriptでプロジェクト作成</span>
+npm create vite@latest my-blog -- --template react-ts
+
+<span class="hljs-comment"># ディレクトリに移動</span>
+<span class="hljs-built_in">cd</span> my-blog
+
+<span class="hljs-comment"># 依存関係をインストール</span>
+npm install</code></pre><h3>追加パッケージのインストール</h3>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash"><span class="hljs-comment"># Tailwind CSS</span>
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+<span class="hljs-comment"># Markdown処理</span>
+npm install unified remark-parse remark-rehype rehype-stringify
+npm install remark-gfm remark-math rehype-katex
+npm install gray-matter
+
+<span class="hljs-comment"># 型定義</span>
+npm install -D @types/node</code></pre><h3>Tailwind CSSの設定</h3>
+<p><code>tailwind.config.js</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-javascript"><span class="hljs-comment">/** <span class="hljs-doctag">@type</span> {<span class="hljs-type">import(&#x27;tailwindcss&#x27;).Config</span>} */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">content</span>: [
+    <span class="hljs-string">&quot;./index.html&quot;</span>,
+    <span class="hljs-string">&quot;./src/**/*.{js,ts,jsx,tsx}&quot;</span>,
+  ],
+  <span class="hljs-attr">theme</span>: {
+    <span class="hljs-attr">extend</span>: {
+      <span class="hljs-attr">typography</span>: {
+        <span class="hljs-attr">DEFAULT</span>: {
+          <span class="hljs-attr">css</span>: {
+            <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">&#x27;75ch&#x27;</span>,
+          },
+        },
+      },
+    },
+  },
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@tailwindcss/typography&#x27;</span>),
+  ],
+}</code></pre><p><code>src/index.css</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-css"><span class="hljs-keyword">@tailwind</span> base;
+<span class="hljs-keyword">@tailwind</span> components;
+<span class="hljs-keyword">@tailwind</span> utilities;
+
+<span class="hljs-comment">/* カスタムスタイル */</span>
+<span class="hljs-keyword">@layer</span> base {
+  <span class="hljs-selector-tag">html</span> {
+    <span class="hljs-attribute">scroll-behavior</span>: smooth;
+  }
+}</code></pre><h2>プロジェクト構造</h2>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-csharp">my-blog/
+├── <span class="hljs-keyword">public</span>/
+│   └── blog/           <span class="hljs-meta"># Markdown記事</span>
+│       ├── hello-world.md
+│       └── assets/     <span class="hljs-meta"># 画像など</span>
+├── src/
+│   ├── components/     <span class="hljs-meta"># Reactコンポーネント</span>
+│   │   ├── ArticleCard.tsx
+│   │   ├── ArticleList.tsx
+│   │   └── Layout.tsx
+│   ├── hooks/          <span class="hljs-meta"># カスタムフック</span>
+│   │   └── useArticle.ts
+│   ├── pages/          <span class="hljs-meta"># ページコンポーネント</span>
+│   │   ├── Home.tsx
+│   │   └── Article.tsx
+│   ├── utils/          <span class="hljs-meta"># ユーティリティ</span>
+│   │   └── markdown.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── tailwind.config.js</code></pre><h2>Markdown処理の実装</h2>
+<h3>Frontmatterのパース</h3>
+<p><code>src/utils/markdown.ts</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">import</span> matter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;gray-matter&#x27;</span>;
+<span class="hljs-keyword">import</span> { unified } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;unified&#x27;</span>;
+<span class="hljs-keyword">import</span> remarkParse <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;remark-parse&#x27;</span>;
+<span class="hljs-keyword">import</span> remarkGfm <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;remark-gfm&#x27;</span>;
+<span class="hljs-keyword">import</span> remarkMath <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;remark-math&#x27;</span>;
+<span class="hljs-keyword">import</span> remarkRehype <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;remark-rehype&#x27;</span>;
+<span class="hljs-keyword">import</span> rehypeKatex <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rehype-katex&#x27;</span>;
+<span class="hljs-keyword">import</span> rehypeStringify <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rehype-stringify&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArticleMeta</span> {
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">date</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">updated</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">tags</span>: <span class="hljs-built_in">string</span>[];
+  <span class="hljs-attr">cover</span>?: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Article</span> {
+  <span class="hljs-attr">meta</span>: <span class="hljs-title class_">ArticleMeta</span>;
+  <span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">html</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">parseMarkdown</span>(<span class="hljs-params"><span class="hljs-attr">markdown</span>: <span class="hljs-built_in">string</span></span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Article</span>&gt; {
+  <span class="hljs-comment">// Frontmatterをパース</span>
+  <span class="hljs-keyword">const</span> { data, content } = <span class="hljs-title function_">matter</span>(markdown);
+  
+  <span class="hljs-comment">// MarkdownをHTMLに変換</span>
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">unified</span>()
+    .<span class="hljs-title function_">use</span>(remarkParse)
+    .<span class="hljs-title function_">use</span>(remarkGfm)          <span class="hljs-comment">// GitHub Flavored Markdown</span>
+    .<span class="hljs-title function_">use</span>(remarkMath)         <span class="hljs-comment">// 数式サポート</span>
+    .<span class="hljs-title function_">use</span>(remarkRehype)
+    .<span class="hljs-title function_">use</span>(rehypeKatex)        <span class="hljs-comment">// KaTeX変換</span>
+    .<span class="hljs-title function_">use</span>(rehypeStringify)
+    .<span class="hljs-title function_">process</span>(content);
+  
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">meta</span>: data <span class="hljs-keyword">as</span> <span class="hljs-title class_">ArticleMeta</span>,
+    content,
+    <span class="hljs-attr">html</span>: <span class="hljs-title class_">String</span>(result),
+  };
+}</code></pre><h3>記事取得フック</h3>
+<p><code>src/hooks/useArticle.ts</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { parseMarkdown } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../utils/markdown&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useArticle</span>(<span class="hljs-params"><span class="hljs-attr">slug</span>: <span class="hljs-built_in">string</span></span>) {
+  <span class="hljs-keyword">const</span> [article, setArticle] = useState&lt;<span class="hljs-title class_">Article</span> | <span class="hljs-literal">null</span>&gt;(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">const</span> [error, setError] = useState&lt;<span class="hljs-title class_">Error</span> | <span class="hljs-literal">null</span>&gt;(<span class="hljs-literal">null</span>);
+
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fetchArticle</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">try</span> {
+        <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>);
+        <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`/blog/<span class="hljs-subst">${slug}</span>.md`</span>);
+        
+        <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Article not found&#x27;</span>);
+        }
+        
+        <span class="hljs-keyword">const</span> markdown = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">text</span>();
+        <span class="hljs-keyword">const</span> parsed = <span class="hljs-keyword">await</span> <span class="hljs-title function_">parseMarkdown</span>(markdown);
+        <span class="hljs-title function_">setArticle</span>(parsed);
+      } <span class="hljs-keyword">catch</span> (e) {
+        <span class="hljs-title function_">setError</span>(e <span class="hljs-keyword">as</span> <span class="hljs-title class_">Error</span>);
+      } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>);
+      }
+    }
+
+    <span class="hljs-title function_">fetchArticle</span>();
+  }, [slug]);
+
+  <span class="hljs-keyword">return</span> { article, loading, error };
+}</code></pre><h2>基本コンポーネントの作成</h2>
+<h3>レイアウトコンポーネント</h3>
+<p><code>src/components/Layout.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">LayoutProps</span> {
+  <span class="hljs-attr">children</span>: <span class="hljs-title class_">ReactNode</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Layout</span>(<span class="hljs-params">{ children }: <span class="hljs-title class_">LayoutProps</span></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;min-h-screen bg-gray-50 dark:bg-gray-900&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;bg-white dark:bg-gray-800 shadow&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-4xl mx-auto px-4 py-6&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-2xl font-bold text-gray-900 dark:text-white&quot;</span>&gt;</span>
+            My Blog
+          <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+      
+      <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-4xl mx-auto px-4 py-8&quot;</span>&gt;</span>
+        {children}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+      
+      <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;bg-white dark:bg-gray-800 border-t&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-4xl mx-auto px-4 py-6 text-center text-gray-600&quot;</span>&gt;</span>
+          © 2025 My Blog
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}</code></pre><h3>記事カードコンポーネント</h3>
+<p><code>src/components/ArticleCard.tsx</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Link</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-router-dom&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArticleCardProps</span> {
+  <span class="hljs-attr">slug</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">date</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">tags</span>: <span class="hljs-built_in">string</span>[];
+  <span class="hljs-attr">cover</span>?: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">ArticleCard</span>(<span class="hljs-params">{ slug, title, date, tags, cover }: <span class="hljs-title class_">ArticleCardProps</span></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Link</span> 
+      <span class="hljs-attr">to</span>=<span class="hljs-string">{</span>`/<span class="hljs-attr">article</span>/${<span class="hljs-attr">slug</span>}`}
+      <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;block bg-white dark:bg-gray-800 rounded-lg shadow-md 
+                 hover:shadow-lg transition-shadow overflow-hidden&quot;</span>
+    &gt;</span>
+      {cover &amp;&amp; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> 
+          <span class="hljs-attr">src</span>=<span class="hljs-string">{cover}</span> 
+          <span class="hljs-attr">alt</span>=<span class="hljs-string">{title}</span>
+          <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;w-full h-48 object-cover&quot;</span>
+        /&gt;</span>
+      )}
+      
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;p-6&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">time</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-sm text-gray-500&quot;</span>&gt;</span>{date}<span class="hljs-tag">&lt;/<span class="hljs-name">time</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-2 text-xl font-semibold text-gray-900 dark:text-white&quot;</span>&gt;</span>
+          {title}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mt-4 flex flex-wrap gap-2&quot;</span>&gt;</span>
+          {tags.map(tag =&gt; (
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> 
+              <span class="hljs-attr">key</span>=<span class="hljs-string">{tag}</span>
+              <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded&quot;</span>
+            &gt;</span>
+              {tag}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          ))}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span></span>
+  );
+}</code></pre><h2>Viteの設定</h2>
+<p><code>vite.config.ts</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { defineConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite&#x27;</span>;
+<span class="hljs-keyword">import</span> react <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-react&#x27;</span>;
+<span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineConfig</span>({
+  <span class="hljs-attr">plugins</span>: [<span class="hljs-title function_">react</span>()],
+  <span class="hljs-attr">resolve</span>: {
+    <span class="hljs-attr">alias</span>: {
+      <span class="hljs-string">&#x27;@&#x27;</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;./src&#x27;</span>),
+    },
+  },
+  <span class="hljs-comment">// Markdown ファイルをアセットとして扱う</span>
+  <span class="hljs-attr">assetsInclude</span>: [<span class="hljs-string">&#x27;**/*.md&#x27;</span>],
+});</code></pre><h2>開発サーバーの起動</h2>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-bash">npm run dev</code></pre><p>ブラウザで <code>http://localhost:5173</code> を開くと、ブログが表示されます 🎉</p>
+<h2>型定義の追加</h2>
+<p><code>src/types/index.ts</code>:</p>
+<pre><button type="button" class="code-copy-button" aria-label="コードをコピー">コピー</button><code class="hljs language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArticleMeta</span> {
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">date</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">updated</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">tags</span>: <span class="hljs-built_in">string</span>[];
+  <span class="hljs-attr">cover</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">description</span>?: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Article</span> {
+  <span class="hljs-attr">slug</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">meta</span>: <span class="hljs-title class_">ArticleMeta</span>;
+  <span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">html</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArticleIndex</span> {
+  <span class="hljs-attr">slug</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">meta</span>: <span class="hljs-title class_">ArticleMeta</span>;
+}</code></pre><h2>まとめ</h2>
+<p>前編では以下を学びました：</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>技術選定</td>
+<td>React + Vite + Tailwind</td>
+</tr>
+<tr>
+<td>プロジェクト構造</td>
+<td>コンポーネント、フック、ユーティリティの分離</td>
+</tr>
+<tr>
+<td>Markdown処理</td>
+<td>unified/remark による変換</td>
+</tr>
+<tr>
+<td>基本UI</td>
+<td>レイアウト、記事カードの実装</td>
+</tr>
+</tbody></table>
+<p>後編では、以下を実装します：</p>
+<ul>
+<li><input disabled="" type="checkbox"> ルーティングの設定</li>
+<li><input disabled="" type="checkbox"> 記事一覧ページ</li>
+<li><input disabled="" type="checkbox"> 記事詳細ページ</li>
+<li><input disabled="" type="checkbox"> ダークモード対応</li>
+<li><input disabled="" type="checkbox"> ビルドとデプロイ</li>
+</ul>
+<hr>
+<p><strong>次回</strong>: <a href="/sample-blog/blog/blog-start-11-build-blog-part2.html">自作ブログ構築（後編）- デプロイと運用</a></p>
+<p><strong>前回</strong>: <a href="/sample-blog/blog/blog-start-09-consistency.html">継続のコツ</a></p>
+</article></div>
+    <script>window.__POST_SLUG__="blog-start-10-build-blog-part1"</script>
+  </body>
+</html>
